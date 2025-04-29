@@ -12,9 +12,9 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <ThemeProvider>
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <div className="min-h-screen bg-background text-foreground transition-colors duration-200">
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -24,9 +24,9 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </div>
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
   </ThemeProvider>
 );
 

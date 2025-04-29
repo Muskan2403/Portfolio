@@ -38,13 +38,13 @@
 }
 
 .certificate-card {
-  @apply bg-white dark:bg-gray-800 p-4 border border-gray-100 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-shadow;
+  @apply bg-card text-card-foreground p-4 border border-border rounded-lg shadow-sm hover:shadow-md transition-shadow;
   opacity: 0;
   transition: all 0.5s ease-out;
 }
 
 .project-card {
-  @apply bg-white rounded-xl shadow-md overflow-hidden card-hover;
+  @apply bg-card text-card-foreground rounded-xl shadow-md overflow-hidden card-hover;
   opacity: 0;
   transition: all 0.5s ease-out;
 }
@@ -134,7 +134,7 @@
 
 @layer base {
   * {
-    border-color: var(--border);
+    @apply border-border;
   }
   
   html {
@@ -142,8 +142,7 @@
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    @apply bg-background text-foreground;
     font-family: 'Poppins', sans-serif;
   }
 
