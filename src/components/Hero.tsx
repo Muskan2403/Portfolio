@@ -78,7 +78,7 @@ const Hero = () => {
                 ref={el => elementsRef.current[0] = el}
                 className="text-lg md:text-xl text-primary font-medium mb-3 opacity-0 translate-y-4 transition-all duration-1000 ease-out"
               >
-                Hello, I'm
+                Welcome, I am
               </h2>
               
               <h1 

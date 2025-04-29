@@ -10,6 +10,7 @@ interface Project {
 
 const Projects = () => {
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
+  const projectRefs = useRef<(HTMLElement | null)[]>([]);
   
   const projects: Project[] = [
     {
@@ -51,17 +52,27 @@ const Projects = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('appear');
+        } else {
+          entry.target.classList.remove('appear');
         }
       });
-    }, { threshold: 0.1 });
+    }, { 
+      threshold: 0.1,
+      rootMargin: '50px'
+    });
 
-    elementsRef.current.forEach((el) => {
-      if (el) observer.observe(el);
+    // Observe all project elements
+    projectRefs.current.forEach((el) => {
+      if (el) {
+        observer.observe(el);
+      }
     });
 
     return () => {
-      elementsRef.current.forEach((el) => {
-        if (el) observer.unobserve(el);
+      projectRefs.current.forEach((el) => {
+        if (el) {
+          observer.unobserve(el);
+        }
       });
     };
   }, []);
@@ -74,7 +85,7 @@ const Projects = () => {
             ref={el => elementsRef.current[0] = el}
             className="text-center mb-12 animate-fade-in"
           >
-            <h2 className="text-3xl font-bold mb-2">My Projects</h2>
+            <h2 className="text-3xl font-bold mb-2">Projects</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           </div>
           
@@ -82,9 +93,12 @@ const Projects = () => {
             {projects.map((project, index) => (
               <div 
                 key={project.title}
-                ref={el => elementsRef.current[index + 1] = el}
-                className="bg-white rounded-xl shadow-md overflow-hidden card-hover animate-fade-in"
-                style={{ animationDelay: `${index * 200}ms` }}
+                ref={el => projectRefs.current[index] = el}
+                className={`project-card ${
+                  index % 3 === 0 ? 'slide-from-left' : 
+                  index % 3 === 1 ? 'slide-from-bottom' : 
+                  'slide-from-right'
+                }`}
               >
                 <div className="relative h-48 overflow-hidden">
                   <img 

@@ -92,7 +92,7 @@ const Skills = () => {
             ref={el => elementsRef.current[0] = el}
             className="text-center mb-12 transition-all duration-700 ease-out"
           >
-            <h2 className="text-3xl font-bold mb-2">My Skills</h2>
+            <h2 className="text-3xl font-bold mb-2">Skills</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           </div>
           

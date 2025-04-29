@@ -10,6 +10,7 @@ interface Education {
 
 const Education = () => {
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
+  const certificateRefs = useRef<(HTMLElement | null)[]>([]);
   
   const educationData: Education[] = [
     {
@@ -69,7 +70,6 @@ const Education = () => {
       image: "/certificates/Networking.jpg",
       verifyLink: "https://www.coursera.org/account/accomplishments/verify/6MNFMRPF5AY4"
     },
-    
   ];
 
   const extraCurricularData = [
@@ -98,17 +98,27 @@ const Education = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('appear');
+        } else {
+          entry.target.classList.remove('appear');
         }
       });
-    }, { threshold: 0.1 });
+    }, { 
+      threshold: 0.1,
+      rootMargin: '50px'
+    });
 
-    elementsRef.current.forEach((el) => {
-      if (el) observer.observe(el);
+    // Observe all certificate elements
+    certificateRefs.current.forEach((el) => {
+      if (el) {
+        observer.observe(el);
+      }
     });
 
     return () => {
-      elementsRef.current.forEach((el) => {
-        if (el) observer.unobserve(el);
+      certificateRefs.current.forEach((el) => {
+        if (el) {
+          observer.unobserve(el);
+        }
       });
     };
   }, []);
@@ -138,14 +148,17 @@ const Education = () => {
                 Certificates
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {certificatesData.map((cert, index) => (
                   <div 
                     key={index}
-                    className="bg-white p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                    ref={el => certificateRefs.current[index] = el}
+                    className={`certificate-card ${
+                      index % 2 === 0 ? 'slide-from-left' : 'slide-from-right'
+                    }`}
                   >
                     <div className="flex flex-col">
-                      <div className="relative w-full aspect-[4/3] mx-auto overflow-hidden rounded-lg mb-4 bg-gray-100">
+                      <div className="relative w-full aspect-[4/3] mx-auto overflow-hidden rounded-lg mb-4 bg-gray-100 dark:bg-gray-700">
                         <img 
                           src={cert.image} 
                           alt={cert.name}
@@ -155,8 +168,8 @@ const Education = () => {
                       <div>
                         <div className="flex justify-between items-start mb-2">
                           <div>
-                            <h4 className="font-semibold text-gray-800">{cert.name}</h4>
-                            <p className="text-sm text-gray-500">{cert.issuer}</p>
+                            <h4 className="font-semibold text-gray-800 dark:text-gray-200">{cert.name}</h4>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{cert.issuer}</p>
                           </div>
                           <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
                             {cert.date}
