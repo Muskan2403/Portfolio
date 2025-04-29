@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ParticleBackground from './ParticleBackground';
 import { cn } from '@/lib/utils';
+import { useEffect, useRef, useState } from 'react';
+import ParticleBackground from './ParticleBackground';
 
 const Hero = () => {
   const elementsRef = useRef<(HTMLElement | null)[]>([]);

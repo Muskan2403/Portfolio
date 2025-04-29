@@ -1,6 +1,6 @@
 
-import React, { useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
   const [name, setName] = useState('');
