@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 262 31% 54%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 199 91% 53%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 31% 54%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 700ms ease-out;
+  }
+  
+  .animate-fade-in.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .gradient-text {
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(to right, var(--primary), var(--secondary));
+    font-weight: 700;
+    display: inline-block;
+  }
+
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+  .card-hover {
+    transition: all 300ms;
+  }
+  
+  .card-hover:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.25rem);
+  }
+
+  /* About Section Animations */
+  .about-title {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 1000ms ease-out;
+  }
+  
+  .about-title.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .about-content {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: all 1000ms ease-out;
+  }
+  
+  .about-content.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .about-paragraph {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 800ms ease-out;
+  }
+  
+  .about-paragraph.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .about-link {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 500ms ease-out;
+  }
+  
+  .about-link.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Staggered delays for paragraphs */
+  .about-paragraph:nth-child(1) { transition-delay: 200ms; }
+  .about-paragraph:nth-child(2) { transition-delay: 400ms; }
+  .about-paragraph:nth-child(3) { transition-delay: 600ms; }
+  
+  /* Contact links delay */
+  .about-link:nth-child(1) { transition-delay: 800ms; }
+  .about-link:nth-child(2) { transition-delay: 900ms; }
+  .about-link:nth-child(3) { transition-delay: 1000ms; }
+  .about-link:nth-child(4) { transition-delay: 1100ms; }
+  
+  /* Hover effects */
+  .about-link-hover {
+    transition: all 300ms;
+  }
+  
+  .about-link-hover:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    background-color: rgb(249, 250, 251);
+  }
+  
+  /* Ensure animations work on initial load */
+  @media (prefers-reduced-motion: no-preference) {
+    .about-title, .about-content, .about-paragraph, .about-link {
+      will-change: transform, opacity;
+    }
+  }
+
+  /* Scroll Animation Classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all 1000ms ease-out;
+    will-change: transform, opacity;
+  }
+  
+  .animate-on-scroll.animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+  }
+
+  /* Delay classes */
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+  .delay-600 { transition-delay: 600ms; }
+  .delay-700 { transition-delay: 700ms; }
+  
+  /* About section container */
+  .about-section-container {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
