@@ -7,7 +7,30 @@ const About = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          // Add reveal class when section comes into view
           entry.target.classList.add('reveal');
+          
+          // Reset and animate child elements
+          const children = entry.target.querySelectorAll('.animate-child');
+          children.forEach((child) => {
+            child.classList.remove('reveal');
+          });
+          
+          // Stagger the animations with delays
+          children.forEach((child, index) => {
+            setTimeout(() => {
+              child.classList.add('reveal');
+            }, index * 200);
+          });
+        } else {
+          // Remove reveal class when section is out of view
+          entry.target.classList.remove('reveal');
+          
+          // Reset child elements
+          const children = entry.target.querySelectorAll('.animate-child');
+          children.forEach((child) => {
+            child.classList.remove('reveal');
+          });
         }
       });
     }, { 
@@ -32,9 +55,9 @@ const About = () => {
         <div className="max-w-5xl mx-auto">
           <div 
             ref={el => elementsRef.current[0] = el}
-            className="text-center mb-12 transition-all duration-1000 ease-out"
+            className="text-center mb-12 opacity-0 translate-y-8 transition-all duration-1000 ease-out"
           >
-            <h2 className="text-4xl font-bold mb-2">About <span style={{ 
+            <h2 className="text-4xl font-bold mb-2 transform transition-all duration-1000 hover:scale-105">About <span style={{ 
               background: 'linear-gradient(to right, hsl(262, 31%, 54%), hsl(199, 91%, 53%))',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
@@ -42,14 +65,14 @@ const About = () => {
               fontWeight: 'bold',
               display: 'inline-block'
             }}>Me</span></h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto transform transition-all duration-1000 hover:scale-110"></div>
           </div>
           
           <div 
             ref={el => elementsRef.current[1] = el}
-            className="max-w-3xl mx-auto transition-all duration-1000 ease-out"
+            className="max-w-3xl mx-auto opacity-0 translate-y-8 transition-all duration-1000 ease-out"
           >
-            <h3 className="text-2xl font-bold mb-4">
+            <h3 className="text-2xl font-bold mb-4 animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out">
               Hi, I'm <span style={{ 
                 background: 'linear-gradient(to right, hsl(262, 31%, 54%), hsl(199, 91%, 53%))',
                 WebkitBackgroundClip: 'text',
@@ -60,13 +83,13 @@ const About = () => {
               }}>Muskan Darji</span>
             </h3>
             <div className="space-y-4">
-              <p className="text-gray-700 transition-all duration-1000 ease-out delay-100">
+              <p className="text-gray-700 animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out">
                 I am a Computer Science Engineering student at Lovely Professional University with a passion for building web applications and solving complex problems.
               </p>
-              <p className="text-gray-700 transition-all duration-1000 ease-out delay-200">
+              <p className="text-gray-700 animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out">
                 With expertise in JavaScript, Java, and PHP, I create efficient applications with clean architecture and maintainable code. My recent training in Data Structures & Algorithms has further strengthened my problem-solving abilities.
               </p>
-              <p className="text-gray-700 transition-all duration-1000 ease-out delay-300">
+              <p className="text-gray-700 animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out">
                 When I'm not coding, I enjoy participating in hackathons like SIH and contributing to environmental initiatives like the "Adopt a Plant" campaign with WWF India.
               </p>
             </div>
@@ -74,11 +97,11 @@ const About = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm mt-8">
               <a 
                 href="mailto:muskandarji24@gmail.com" 
-                className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 delay-400"
+                className="animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md hover:scale-105 transform"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" 
+                  className="h-8 w-8 text-primary mb-2 transform transition-transform duration-300 hover:scale-110" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
@@ -94,11 +117,11 @@ const About = () => {
               </a>
               <a 
                 href="tel:+919372851278" 
-                className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
+                className="animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md hover:scale-105 transform"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" 
+                  className="h-8 w-8 text-primary mb-2 transform transition-transform duration-300 hover:scale-110" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
@@ -116,11 +139,11 @@ const About = () => {
                 href="https://www.linkedin.com/in/muskandarji30/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
+                className="animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md hover:scale-105 transform"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" 
+                  className="h-8 w-8 text-primary mb-2 transform transition-transform duration-300 hover:scale-110" 
                   fill="currentColor" 
                   viewBox="0 0 24 24"
                 >
@@ -132,11 +155,11 @@ const About = () => {
                 href="https://github.com/Muskan2403" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
+                className="animate-child opacity-0 translate-y-4 transition-all duration-1000 ease-out flex flex-col items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md hover:scale-105 transform"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary mb-2 group-hover:scale-110 transition-transform" 
+                  className="h-8 w-8 text-primary mb-2 transform transition-transform duration-300 hover:scale-110" 
                   fill="currentColor" 
                   viewBox="0 0 24 24"
                 >
